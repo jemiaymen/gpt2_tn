@@ -8,11 +8,24 @@ from transformers import (TextDataset,
 
 class TrainerGPT2():
 
-    def __init__(self, train='train.txt', dev='dev.txt', model_name='aubmindlab/aragpt2-mega'):
+    def __init__(self, train='train.txt',
+                 dev='dev.txt',
+                 model_name='aubmindlab/aragpt2-large',
+                 model_out='model/gpt2_tn',
+                 block_size=128,
+                 auto=False
+                 ):
+
         self.train = train
         self.dev = dev
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModelForCausalLM.from_pretrained(model_name)
+
+        if auto:
+            self.load_dataset(block_size)
+            self.init_train_args(out_dir=model_out)
+            self.do_train()
+            self.do_eval()
 
     def load_dataset(self, block_size=128):
 
