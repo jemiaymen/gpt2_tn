@@ -10,7 +10,7 @@ class TrainerGPT2():
 
     def __init__(self, train='train.txt',
                  dev='dev.txt',
-                 model_name='aubmindlab/aragpt2-large',
+                 model_name='aubmindlab/aragpt2-base',
                  model_out='model/gpt2_tn',
                  block_size=128,
                  auto=False
@@ -44,7 +44,7 @@ class TrainerGPT2():
         )
 
     def init_train_args(self, out_dir, epochs=3,
-                        batch_size_train=32, batch_size_dev=32,
+                        batch_size_train=16, batch_size_dev=32,
                         eval_steps=400, save_steps=800, warmup_steps=500,
                         predict_loss_only=True
                         ):
